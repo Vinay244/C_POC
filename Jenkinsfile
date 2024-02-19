@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    tools {
+        git 'Git'
+    }
     stages {
         stage('Checkout') {
             steps {
