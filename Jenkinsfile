@@ -1,18 +1,18 @@
 pipeline {
-    agent any  // Use any available agent (Jenkins will dynamically allocate one)
+    agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building the project...'
-                // Add commands to compile code or any other build steps
+                // Check out your source code from version control (e.g., Git)
+                git 'https://github.com/Vinay244/C_POC.git'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Running tests...'
-                // Add commands to run tests
+                // Build the Docker image 
+                sh 'docker build -t vinayc .'
             }
         }
     }
