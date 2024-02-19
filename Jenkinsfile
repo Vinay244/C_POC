@@ -1,26 +1,19 @@
 pipeline {
-    agent any
+    agent any  // Use any available agent (Jenkins will dynamically allocate one)
+
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                // Check out your source code from version control (e.g., Git)
-                git 'https://github.com/Vinay244/C_POC.git'
+                echo 'Building the project...'
+                // Add commands to compile code or any other build steps
             }
         }
 
-        stage('Build and Push Docker Image') {
+        stage('Test') {
             steps {
-                script {
-                    // Build the Docker image
-                    sh 'docker build -t vinayc .'
-
-                    // Push the Docker image to Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image('yourusername/hello-c').push()
-                    }
-                }
+                echo 'Running tests...'
+                // Add commands to run tests
             }
         }
     }
 }
-
