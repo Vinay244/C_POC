@@ -1,29 +1,25 @@
-pipeline{
-  agent any  
-  stages {
-   stage("Opening"){
-         steps{
-            //Welcome message
-            script{
-               sh "echo 'Welcome to Jenkins'"
-}
-}
-}
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Check out your source code from version control (e.g., Git)
+                git 'https://github.com/Vinay244/C_POC.git'
+            }
+        }
 
-   stage("Workspace_cleanup"){
-        //Cleaning WorkSpace
-        steps{
-            step([$class: 'WsCleanup'])
-}
-}
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh 'docker build -t vinayc .'
 
-   stage("Repo_clone"){
-       //Clone repo from GitHub
-      steps {
-         checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'git@github.com:Vinay244/C_POC.git']]])
-']]])
-
-}
-}
-}
+                    // Push the Docker image to Docker Hub
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image('yourusername/hello-c').push()
+                    }
+                }
+            }
+        }
+    }
 }
