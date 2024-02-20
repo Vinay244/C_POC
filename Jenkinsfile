@@ -5,14 +5,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/ivarreddy059/Project_EX.git' 
+                    git branch: 'main', url: 'https://github.com/Vinay244/C_POC.git' 
                 }
             }
         }
         stage('Build image'){
         steps{
             script {
-                sh 'docker build -t test .'
+                sh 'docker build -t vinay .'
     }
 }
 }
