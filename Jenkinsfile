@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
+                    sh 'docker login -u vinay4511 -p vinayd@4511'
                     sh 'docker build -t vinayc .'
                     }
                 }
