@@ -20,7 +20,8 @@ pipeline{
    stage("Repo_clone"){
        //Clone repo from GitHub
       steps {
-         checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Vinay244/C_POC.git']]])
+         checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Vinay244/C_POC.git']]])
+']]])
 
 }
 }
