@@ -8,7 +8,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Vinay244/C_POC.git'
+                //git 'https://github.com/Vinay244/C_POC.git'
+                checkout ([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Vinay244/C_POC.git']]])
+
+}
             }
         }
 
