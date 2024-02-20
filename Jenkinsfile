@@ -1,26 +1,20 @@
 pipeline {
     agent any
-
-    environment {
-        // Define the GitHub credentials ID
-        GITHUB_CREDENTIALS = credentials('github-token')
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                // Clean workspace before checking out
-                deleteDir()
+                // Check out your source code from version control (e.g., Git)
+                git 'https://github.com/Vinay244/C_POC.git'
+            }
+        }
 
-                // Checkout the repository using GitHub credentials
+        stage('Build and Push Docker Image') {
+            steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: GITHUB_CREDENTIALS, usernameVariable: 'Vinay244', passwordVariable: 'Vinay@4511')]) {
-                        checkout([$class: 'Git', 
-                            branches: [[name: '*/main']], 
-                            userRemoteConfigs: [[url: 'https://github.com/Vinay244/C_POC/']]])
+                    // Build the Docker image
+                    sh 'docker build -t vinayc .'
                     }
                 }
             }
         }
-    }
 }
