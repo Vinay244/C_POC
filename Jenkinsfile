@@ -1,24 +1,26 @@
-pipeline {
-    agent any
+pipeline{
+  agent any  
+  stages {
+   stage("Opening"){
+         steps{
+            //Welcome message
+            script{
+               sh "echo 'Welcome to Jenkins'"
+}
+}
+}
 
-    tools {
-        git 'Default' // Use the default Git installation
-    }
+   stage("Workspace_cleanup"){
+        //Cleaning WorkSpace
+        steps{
+            step([$class: 'WsCleanup'])
+}
+}
 
-    stages {
-        stage('Checkout') {
-            steps {
-                //git 'https://github.com/Vinay244/C_POC.git'
-                checkout ([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Vinay244/C_POC.git']]])
+   stage("Repo_clone"){
+       //Clone repo from GitHub
+      steps {
+         checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'git@github.com:Vinay244/C_POC.git']]])
 
 }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t vinayc .'
-            }
-        }
-    }
 }
