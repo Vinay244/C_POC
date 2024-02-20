@@ -22,14 +22,5 @@ pipeline {
                 }
             }
         }
-
-        // Add more stages for your build or deployment process
-        stage('Build') {
-            steps {
-                // Your build steps go here
-            }
-        }
-
-       
     }
 }
