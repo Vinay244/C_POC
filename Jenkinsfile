@@ -1,11 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKERHUB_USERNAME = credentials('DOCKERHUB_USERNAME')
-        DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD')
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -14,15 +8,6 @@ pipeline {
                 }
             }
         }
-        stage('Debugging Output') {
-            steps {
-                script {
-                    echo "DOCKERHUB_USERNAME: ${DOCKERHUB_USERNAME}"
-                    echo "DOCKERHUB_PASSWORD: ${DOCKERHUB_PASSWORD}"
-                }
-            }
-        }
-
         stage('Build image') {
             steps {
                 script {
@@ -30,7 +15,6 @@ pipeline {
                 }
             }
         }
-
         stage('Push image to ACR') {
             steps {
                 script {
