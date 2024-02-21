@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+     environment {
+        DOCKERHUB_USERNAME = credentials('DOCKERHUB_USERNAME')
+        DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -19,7 +22,6 @@ pipeline {
         stage('Push image to ACR'){
         steps{
             script{
-                withCredentials([string(credentialsId: 'DOCKERHUB_USERNAME', variable: 'DOCKERHUB_USERNAME'), string(credentialsId: 'DOCKERHUB_PASSWORD', variable: 'DOCKERHUB_PASSWORD')]) {
                         sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
                         //sh "docker login -u vinay4511 -p vinayd@4511"
                         sh 'docker tag vinay vinay4511/c_poc:latest'
@@ -30,4 +32,4 @@ pipeline {
         
 }
 }
-}
+
