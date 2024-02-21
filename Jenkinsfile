@@ -20,7 +20,7 @@ pipeline {
         steps{
             script{
                 sh "docker login -u vinay4511 -p vinayd@4511"
-                sh 'docker tag vinay vinay4511/vinay4511/c_poc:latest'
+                sh 'docker tag vinay vinay4511/c_poc:latest'
                 sh 'docker push vinay4511/vinay4511/c_poc:latest'
                }
         }
